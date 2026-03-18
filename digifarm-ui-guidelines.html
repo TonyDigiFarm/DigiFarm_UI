@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DigiFarm — UI Guidelines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #0E1621;
+      --bg2:      #17212B;
+      --bg3:      #1D2B39;
+      --border:   #17212B;
+      --green:    #009463;
+      --purple:   #9C7FEF;
+      --white:    #FFFFFF;
+      --muted:    #8697A8;
+      --radius:   4px;
+      --font:     'Inter', sans-serif;
+      --mono:     'IBM Plex Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 220px;
+      background: var(--bg2);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .nav-logo {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 20px;
+    }
+    .nav-logo img { height: 28px; width: auto; }
+
+    .nav-section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--purple);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 20px 8px;
+      margin-top: 12px;
+    }
+
+    nav a {
+      display: block;
+      padding: 7px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    nav a:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+    nav a.active { color: var(--green); border-left-color: var(--green); background: rgba(0,148,99,0.06); }
+
+    /* MAIN */
+    main {
+      margin-left: 220px;
+      padding: 48px 56px;
+      max-width: 1100px;
+    }
+
+    /* SECTION */
+    section { margin-bottom: 72px; }
+    section:first-of-type { margin-top: 0; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 28px;
+      max-width: 560px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 0 0 28px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--purple);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* GRID */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+    /* COLOR SWATCHES */
+    .swatch {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .swatch-color { height: 80px; }
+    .swatch-info { background: var(--bg2); padding: 12px 14px; }
+    .swatch-name { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 2px; }
+    .swatch-role { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+    .swatch-hex { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+    /* TYPOGRAPHY SPECIMENS */
+    .type-row {
+      display: flex; align-items: baseline; gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      width: 160px; flex-shrink: 0;
+      font-family: var(--mono); font-size: 10px; color: var(--muted);
+      line-height: 1.8;
+    }
+    .type-sample { flex: 1; }
+
+    /* RADIUS */
+    .radius-demo {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .radius-box {
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+    }
+
+    /* SPACING */
+    .spacing-row { display: flex; align-items: center; gap: 16px; padding: 8px 0; }
+    .spacing-bar { background: var(--green); height: 6px; border-radius: 3px; opacity: 0.7; }
+    .spacing-label { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 80px; }
+
+    /* COMPONENTS */
+    .comp-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-label { font-family: var(--mono); font-size: 10px; color: var(--purple); width: 100%; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* BUTTONS */
+    .btn-primary {
+      padding: 8px 18px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      padding: 8px 18px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.3); }
+
+    .btn-ghost {
+      padding: 8px 18px;
+      background: transparent;
+      color: var(--green);
+      border: 1px solid rgba(0,148,99,0.35);
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(0,148,99,0.08); }
+
+    .btn-danger {
+      padding: 8px 18px;
+      background: rgba(248,74,74,0.12);
+      color: #F84A4A;
+      border: 1px solid rgba(248,74,74,0.25);
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .btn-sm {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+    .btn-lg {
+      padding: 11px 24px;
+      font-size: 14px;
+    }
+
+    /* INPUTS */
+    .input-demo {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 13px;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.15s;
+    }
+    .input-demo::placeholder { color: var(--muted); }
+    .input-demo:focus { border-color: var(--green); }
+    .input-demo.error { border-color: #F84A4A; }
+
+    /* INPUT WITH ICONS */
+    .input-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 220px;
+    }
+    .input-wrap .input-icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      color: var(--muted);
+    }
+    .input-wrap .input-icon-left  { left: 11px; }
+    .input-wrap .input-icon-right { right: 11px; }
+    .input-wrap input {
+      width: 100%;
+    }
+    .input-wrap.has-left  input { padding-left: 34px; }
+    .input-wrap.has-right input { padding-right: 34px; }
+    .input-wrap.has-both  input { padding-left: 34px; padding-right: 34px; }
+
+    /* SLIDER */
+    .slider-demo {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 220px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+      cursor: pointer;
+    }
+    .slider-demo::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 2px solid var(--bg2);
+      box-shadow: 0 0 0 1px var(--green);
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .slider-demo::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 4px rgba(0,148,99,0.2);
+    }
+    .slider-demo::-moz-range-thumb {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 2px solid var(--bg2);
+      box-shadow: 0 0 0 1px var(--green);
+      cursor: pointer;
+    }
+    .slider-track-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 220px;
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    select.input-demo {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 40px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%238697A8' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    /* BADGE / TAGS */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .badge-green { background: rgba(0,148,99,0.15); color: #009463; border: 1px solid rgba(0,148,99,0.3); }
+    .badge-purple { background: rgba(156,127,239,0.15); color: var(--purple); border: 1px solid rgba(156,127,239,0.3); }
+    .badge-amber { background: rgba(234,137,29,0.12); color: #EA891D; border: 1px solid rgba(234,137,29,0.25); }
+    .badge-red { background: rgba(248,74,74,0.12); color: #F84A4A; border: 1px solid rgba(248,74,74,0.25); }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    /* TOGGLE */
+    .toggle-demo {
+      width: 36px; height: 20px; border-radius: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative; cursor: pointer; flex-shrink: 0;
+    }
+    .toggle-demo::after {
+      content: '';
+      position: absolute; top: 3px; left: 3px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--muted);
+      transition: transform 0.2s;
+    }
+    .toggle-demo.on { background: rgba(0,148,99,0.25); border-color: rgba(0,148,99,0.4); }
+    .toggle-demo.on::after { transform: translateX(16px); background: var(--green); }
+
+    /* CARD COMPONENTS */
+    .demo-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 16px;
+      width: 260px;
+    }
+    .demo-card-label { font-family: var(--mono); font-size: 10px; color: var(--purple); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .demo-card-val { font-size: 20px; font-weight: 600; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .demo-card-sub { font-size: 11px; color: var(--muted); }
+
+    /* BLUR SURFACE */
+    .blur-surface {
+      background: rgba(23,33,43,0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+
+    /* ALERT */
+    .alert {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .alert-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .alert-green { background: rgba(0,148,99,0.1); border: 1px solid rgba(0,148,99,0.25); color: #009463; }
+    .alert-amber { background: rgba(234,137,29,0.08); border: 1px solid rgba(234,137,29,0.2); color: #EA891D; }
+    .alert-red { background: rgba(248,74,74,0.08); border: 1px solid rgba(248,74,74,0.2); color: #F84A4A; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 400; }
+    td { padding: 10px 14px; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    td:first-child { color: var(--white); font-weight: 500; }
+    tr:last-child td { border-bottom: none; }
+
+    /* CODE */
+    .code-block {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    .code-block .k { color: var(--purple); }
+    .code-block .v { color: var(--green); }
+    .code-block .s { color: #EA891D; }
+    .code-block .c { color: #8697A8; }
+
+    /* ICON GRID */
+    .icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .icon-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 8px;
+      background: var(--bg3);
+      border-radius: var(--radius);
+      font-family: var(--mono); font-size: 10px; color: var(--muted);
+      text-align: center;
+    }
+
+    /* HEADER BAR DEMO */
+    .header-demo {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      margin-bottom: 48px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .page-title { font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .page-subtitle { font-size: 13px; color: var(--muted); }
+
+    /* VERSION PILL */
+    .version-pill {
+      display: inline-block;
+      background: rgba(0,148,99,0.12);
+      border: 1px solid rgba(0,148,99,0.25);
+      border-radius: var(--radius);
+      padding: 3px 10px;
+      font-family: var(--mono); font-size: 11px; color: var(--green);
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;gap:7px;padding:0 20px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8697A8;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#FFFFFF'" onmouseout="this.style.color='#8697A8'">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Demo Hub
+  </a>
+  <div class="nav-logo">
+    <img src="data:image/svg+xml,%3Csvg%20width%3D%22431%22%20height%3D%22108%22%20viewBox%3D%220%200%20431%20108%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M268.295%2079.0741V25.2651H301.663V32.254H276.413V48.6489H299.272V55.6115H276.413V79.0741H268.295Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M318.432%2079.9674C315.874%2079.9674%20313.562%2079.4944%20311.495%2078.5486C309.428%2077.5852%20307.791%2076.1927%20306.582%2074.371C305.391%2072.5494%20304.795%2070.3161%20304.795%2067.6712C304.795%2065.3941%20305.233%2063.5199%20306.109%2062.0486C306.985%2060.5772%20308.167%2059.4124%20309.656%2058.5541C311.145%2057.6959%20312.809%2057.0478%20314.648%2056.6099C316.487%2056.172%20318.361%2055.8392%20320.271%2055.6115C322.688%2055.3312%20324.65%2055.1035%20326.156%2054.9284C327.662%2054.7357%20328.757%2054.4291%20329.44%2054.0088C330.123%2053.5884%20330.465%2052.9053%20330.465%2051.9594V51.7755C330.465%2049.4809%20329.817%2047.703%20328.521%2046.4419C327.242%2045.1807%20325.333%2044.5502%20322.793%2044.5502C320.148%2044.5502%20318.064%2045.1369%20316.54%2046.3105C315.033%2047.4666%20313.991%2048.754%20313.413%2050.1728L306.03%2048.4913C306.906%2046.039%20308.185%2044.0597%20309.866%2042.5534C311.565%2041.0295%20313.518%2039.926%20315.725%2039.2428C317.932%2038.5422%20320.253%2038.1919%20322.688%2038.1919C324.299%2038.1919%20326.007%2038.3846%20327.811%2038.7699C329.633%2039.1377%20331.332%2039.8209%20332.908%2040.8193C334.502%2041.8177%20335.807%2043.2452%20336.823%2045.1019C337.839%2046.9411%20338.347%2049.332%20338.347%2052.2747V79.0741H330.675V73.5565H330.36C329.852%2074.5725%20329.09%2075.5709%20328.074%2076.5518C327.058%2077.5326%20325.753%2078.3471%20324.159%2078.9952C322.565%2079.6433%20320.656%2079.9674%20318.432%2079.9674ZM320.139%2073.6616C322.311%2073.6616%20324.168%2073.2325%20325.709%2072.3742C327.268%2071.5159%20328.451%2070.3949%20329.256%2069.0112C330.08%2067.6099%20330.491%2066.1123%20330.491%2064.5183V59.3161C330.211%2059.5963%20329.668%2059.8591%20328.862%2060.1043C328.074%2060.332%20327.172%2060.5334%20326.156%2060.7086C325.14%2060.8663%20324.15%2061.0151%20323.187%2061.1553C322.224%2061.2779%20321.418%2061.383%20320.77%2061.4705C319.246%2061.6632%20317.853%2061.9873%20316.592%2062.4427C315.349%2062.8981%20314.35%2063.5549%20313.597%2064.4132C312.861%2065.254%20312.494%2066.375%20312.494%2067.7763C312.494%2069.7206%20313.212%2071.1919%20314.648%2072.1903C316.084%2073.1712%20317.915%2073.6616%20320.139%2073.6616Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M348.024%2079.0741V38.7174H355.617V45.1282H356.037C356.773%2042.9562%20358.069%2041.2484%20359.926%2040.0048C361.8%2038.7436%20363.919%2038.1131%20366.284%2038.1131C366.774%2038.1131%20367.352%2038.1306%20368.018%2038.1656C368.701%2038.2006%20369.235%2038.2444%20369.621%2038.297V45.8113C369.305%2045.7237%20368.745%2045.6274%20367.939%2045.5223C367.133%2045.3997%20366.328%2045.3384%20365.522%2045.3384C363.665%2045.3384%20362.01%2045.7325%20360.556%2046.5207C359.12%2047.2914%20357.981%2048.3686%20357.141%2049.7524C356.3%2051.1186%20355.879%2052.6776%20355.879%2054.4291V79.0741H348.024Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M375.632%2079.0741V38.7174H383.173V45.2858H383.672C384.513%2043.0613%20385.888%2041.3272%20387.797%2040.0836C389.706%2038.8225%20391.992%2038.1919%20394.654%2038.1919C397.352%2038.1919%20399.611%2038.8225%20401.433%2040.0836C403.272%2041.3448%20404.63%2043.0788%20405.505%2045.2858H405.926C406.889%2043.1314%20408.422%2041.4148%20410.524%2040.1362C412.626%2038.84%20415.13%2038.1919%20418.038%2038.1919C421.699%2038.1919%20424.685%2039.3392%20426.997%2041.6338C429.327%2043.9284%20430.492%2047.3877%20430.492%2052.012V79.0741H422.636V52.7476C422.636%2050.0151%20421.892%2048.0358%20420.403%2046.8097C418.914%2045.5836%20417.136%2044.9706%20415.069%2044.9706C412.512%2044.9706%20410.524%2045.7588%20409.105%2047.3352C407.686%2048.8941%20406.977%2050.8997%20406.977%2053.3519V79.0741H399.147V52.2484C399.147%2050.0589%20398.464%2048.2986%20397.098%2046.9674C395.732%2045.6362%20393.954%2044.9706%20391.764%2044.9706C390.275%2044.9706%20388.9%2045.3647%20387.639%2046.1529C386.396%2046.9236%20385.388%2048.0008%20384.618%2049.3846C383.864%2050.7683%20383.488%2052.371%20383.488%2054.1927V79.0741H375.632Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M146.726%2079.0654H129.306V25.2565H147.277C152.55%2025.2565%20157.078%2026.3337%20160.861%2028.4882C164.644%2030.6251%20167.543%2033.6992%20169.558%2037.7103C171.589%2041.704%20172.605%2046.4946%20172.605%2052.0821C172.605%2057.6872%20171.581%2062.5041%20169.531%2066.5328C167.499%2070.5614%20164.557%2073.6618%20160.703%2075.8337C156.85%2077.9882%20152.191%2079.0654%20146.726%2079.0654ZM137.425%2071.9715H146.279C150.378%2071.9715%20153.785%2071.2008%20156.499%2069.6594C159.214%2068.1005%20161.246%2065.8497%20162.595%2062.907C163.944%2059.9468%20164.618%2056.3385%20164.618%2052.0821C164.618%2047.8608%20163.944%2044.2788%20162.595%2041.3361C161.264%2038.3935%20159.276%2036.1602%20156.631%2034.6363C153.986%2033.1124%20150.702%2032.3505%20146.778%2032.3505H137.425V71.9715Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M182.071%2079.0654V38.7087H189.926V79.0654H182.071ZM186.038%2032.4818C184.672%2032.4818%20183.498%2032.0264%20182.517%2031.1156C181.554%2030.1872%20181.072%2029.0837%20181.072%2027.8051C181.072%2026.5089%20181.554%2025.4054%20182.517%2024.4946C183.498%2023.5662%20184.672%2023.1021%20186.038%2023.1021C187.404%2023.1021%20188.569%2023.5662%20189.532%2024.4946C190.513%2025.4054%20191.004%2026.5089%20191.004%2027.8051C191.004%2029.0837%20190.513%2030.1872%20189.532%2031.1156C188.569%2032.0264%20187.404%2032.4818%20186.038%2032.4818Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M217.415%2095.0399C214.21%2095.0399%20211.451%2094.6196%20209.139%2093.7788C206.845%2092.938%20204.97%2091.8258%20203.517%2090.442C202.063%2089.0583%20200.977%2087.5431%20200.259%2085.8966L207.011%2083.1116C207.484%2083.8823%20208.115%2084.6968%20208.903%2085.5551C209.708%2086.4309%20210.794%2087.1753%20212.161%2087.7884C213.544%2088.4014%20215.322%2088.7079%20217.494%2088.7079C220.472%2088.7079%20222.933%2087.981%20224.877%2086.5272C226.822%2085.0909%20227.794%2082.7963%20227.794%2079.6434V71.7087H227.294C226.822%2072.567%20226.138%2073.5216%20225.245%2074.5726C224.369%2075.6235%20223.161%2076.5344%20221.619%2077.3051C220.078%2078.0758%20218.072%2078.4611%20215.603%2078.4611C212.415%2078.4611%20209.542%2077.7167%20206.985%2076.2278C204.445%2074.7215%20202.431%2072.5057%20200.942%2069.5805C199.47%2066.6379%20198.735%2063.0208%20198.735%2058.7294C198.735%2054.438%20199.462%2050.7597%20200.915%2047.6944C202.387%2044.6291%20204.401%2042.282%20206.958%2040.653C209.516%2039.0065%20212.415%2038.1833%20215.655%2038.1833C218.16%2038.1833%20220.183%2038.6036%20221.724%2039.4444C223.266%2040.2677%20224.466%2041.231%20225.324%2042.3345C226.2%2043.438%20226.874%2044.4102%20227.347%2045.2509H227.925V38.7087H235.623V79.9587C235.623%2083.4269%20234.818%2086.2732%20233.206%2088.4977C231.595%2090.7223%20229.414%2092.3688%20226.664%2093.4372C223.931%2094.5057%20220.849%2095.0399%20217.415%2095.0399ZM217.337%2071.9452C219.596%2071.9452%20221.505%2071.4197%20223.064%2070.3688C224.641%2069.3003%20225.832%2067.7764%20226.638%2065.7971C227.461%2063.8003%20227.873%2061.4094%20227.873%2058.6243C227.873%2055.9094%20227.47%2053.5185%20226.664%2051.4516C225.858%2049.3847%20224.676%2047.7732%20223.117%2046.6172C221.558%2045.4436%20219.631%2044.8568%20217.337%2044.8568C214.972%2044.8568%20213.001%2045.4699%20211.425%2046.696C209.849%2047.9046%20208.658%2049.5511%20207.852%2051.6355C207.064%2053.7199%20206.669%2056.0495%20206.669%2058.6243C206.669%2061.2692%20207.072%2063.5901%20207.878%2065.5869C208.684%2067.5837%20209.875%2069.1427%20211.451%2070.2637C213.045%2071.3847%20215.007%2071.9452%20217.337%2071.9452Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M246.159%2079.0654V38.7087H254.015V79.0654H246.159ZM250.126%2032.4818C248.76%2032.4818%20247.587%2032.0264%20246.606%2031.1156C245.642%2030.1872%20245.161%2029.0837%20245.161%2027.8051C245.161%2026.5089%20245.642%2025.4054%20246.606%2024.4946C247.587%2023.5662%20248.76%2023.1021%20250.126%2023.1021C251.493%2023.1021%20252.658%2023.5662%20253.621%2024.4946C254.602%2025.4054%20255.092%2026.5089%20255.092%2027.8051C255.092%2029.0837%20254.602%2030.1872%20253.621%2031.1156C252.658%2032.0264%20251.493%2032.4818%20250.126%2032.4818Z%22%20fill%3D%22%23009463%22/%3E%0A%3Crect%20x%3D%220.0580139%22%20width%3D%22108%22%20height%3D%22108%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M27.0921%2021.1278C37.4479%2021.131%2047.8462%2020.844%2058.1976%2021.1249C60.4031%2021.1847%2062.6955%2021.3483%2064.8675%2021.7763C66.5852%2022.1147%2068.2856%2022.7958%2069.9066%2023.4403C71.8263%2024.2035%2073.6253%2024.9833%2075.3499%2026.1151C76.0751%2026.5911%2076.7991%2027.0709%2077.5062%2027.5731C78.033%2027.9473%2078.5601%2028.3292%2079.0384%2028.7616C80.1918%2029.8042%2081.3395%2030.8553%2082.4427%2031.9501C82.9902%2032.4934%2083.4552%2033.1252%2083.9203%2033.745C84.5693%2034.61%2085.2042%2035.4876%2085.808%2036.3847C86.6833%2037.6852%2087.4501%2039.0494%2088.0804%2040.4882C88.7472%2042.01%2089.3558%2043.4134%2089.7679%2045.0194C90.3292%2047.207%2090.7293%2049.2229%2091.0453%2051.4472C91.3189%2053.3737%2091.2625%2055.3105%2091.2406%2057.244C91.2289%2058.2755%2091.1423%2059.3097%2091.0296%2060.3358C90.9364%2061.1843%2090.766%2062.0256%2090.6097%2062.8661C90.485%2063.537%2090.3751%2064.2161%2090.1781%2064.8671C89.8682%2065.8907%2089.4571%2066.8838%2089.1497%2067.9081C87.5716%2073.1685%2083.9976%2078.0652%2079.848%2081.5761C77.54%2083.5288%2075.0545%2085.0355%2072.4076%2086.4901C68.4%2088.6923%2063.7014%2089.397%2059.224%2089.8495C55.2705%2090.249%2051.3154%2089.9542%2047.3626%2090.0194C40.4316%2090.1338%2033.4719%2090.1373%2026.5404%2090.0126C25.741%2089.9982%2024.9725%2089.7114%2024.2308%2089.2997C23.4388%2088.8601%2023.0381%2088.1761%2022.6234%2087.4638C22.5199%2087.286%2022.4945%2087.0622%2022.391%2086.8563C22.3485%2065.968%2022.3486%2045.083%2022.391%2024.1444C22.3954%2021.979%2023.9383%2021.1278%2027.0921%2021.1278ZM82.4056%2072.6141C79.0364%2071.7942%2073.9153%2072.3715%2070.7455%2073.6884C69.7488%2074.1024%2068.6915%2074.3713%2067.6937%2074.7831C66.7709%2075.1639%2065.8641%2075.603%2065.0013%2076.1044C60.7274%2078.588%2057.7821%2082.0425%2054.9447%2085.9686C56.7004%2086.171%2058.5528%2086.0037%2060.3197%2086.0038C62.9305%2086.004%2066.0971%2085.0052%2068.5023%2084.0507C69.7336%2083.562%2071.0336%2082.9916%2072.1624%2082.2899C73.4612%2081.4827%2074.7818%2080.6165%2076.0042%2079.6972C76.5814%2079.2631%2077.1158%2078.7717%2077.6956%2078.2284C79.4792%2076.5877%2081.0725%2074.7879%2082.4056%2072.6141ZM42.2347%2074.33C37.0927%2072.2035%2031.7704%2071.3718%2026.1644%2072.6005V86.0028C29.4437%2086.0028%2032.6397%2086.0061%2035.8353%2085.9911C35.9906%2085.9904%2036.2207%2085.863%2036.2865%2085.7304C37.1652%2083.9587%2037.7957%2082.0549%2038.6732%2080.2704C39.358%2078.8779%2040.141%2077.6557%2040.9867%2076.3573C41.4038%2075.7168%2041.7898%2075.0557%2042.2347%2074.33ZM77.7396%2058.868C72.9252%2059.2335%2067.9634%2060.0684%2063.5345%2062.1024C62.2942%2062.6721%2061.0839%2063.3112%2059.8792%2063.955C58.9477%2064.4527%2058.0247%2064.9717%2057.1331%2065.537C56.383%2066.0126%2055.6837%2066.5689%2054.9622%2067.0897C54.1924%2067.6454%2053.4077%2068.1824%2052.6576%2068.7636C52.0735%2069.216%2051.48%2069.6756%2050.9828%2070.2167C49.3168%2072.0297%2047.6972%2073.8296%2046.1009%2075.7108C45.0631%2076.9338%2044.2282%2078.2679%2043.4281%2079.6561C42.9655%2080.4586%2042.4895%2081.2546%2042.0589%2082.0741C41.6161%2082.9168%2041.2051%2083.7773%2040.8119%2084.6444C40.6227%2085.0615%2040.5063%2085.512%2040.3382%2086.0028C43.7138%2086.0028%2046.9799%2086.0066%2050.2455%2085.9891C50.4106%2085.9883%2050.6476%2085.8387%2050.7269%2085.6913C51.8683%2083.5585%2053.1357%2081.1891%2054.8499%2079.4696C59.342%2074.9637%2064.0777%2071.5786%2070.2201%2069.6962C74.2076%2068.4742%2078.7688%2068.0201%2082.8968%2068.6395C83.4583%2068.7238%2084.0179%2068.8219%2084.6742%2068.9305C85.2104%2067.2867%2085.7036%2065.7298%2086.2269%2064.1835C86.7609%2062.6053%2086.9598%2060.9678%2087.2054%2059.4013C86.5853%2059.2857%2086.0413%2059.1467%2085.4896%2059.0907C84.4979%2058.9901%2083.5019%2058.8991%2082.5062%2058.8768C80.953%2058.8421%2079.3984%2058.8681%2077.7396%2058.868ZM49.8031%2079.9628C50.5054%2079.963%2051.0746%2080.5328%2051.0746%2081.2352C51.0744%2081.9375%2050.5054%2082.5065%2049.8031%2082.5067C49.1006%2082.5067%2048.5307%2081.9377%2048.5306%2081.2352C48.5306%2080.5327%2049.1005%2079.9628%2049.8031%2079.9628ZM68.6703%2075.7235C69.6068%2075.7235%2070.3664%2076.4823%2070.3665%2077.4188C70.3665%2078.3555%2069.607%2079.1151%2068.6703%2079.1151C67.7337%2079.1149%2066.9749%2078.3554%2066.9749%2077.4188C66.9751%2076.4824%2067.7338%2075.7237%2068.6703%2075.7235ZM30.9339%2076.1464C31.6365%2076.1464%2032.2064%2076.7163%2032.2064%2077.4188C32.2063%2078.1213%2031.6364%2078.6903%2030.9339%2078.6903C30.2317%2078.6901%2029.6626%2078.1211%2029.6624%2077.4188C29.6624%2076.7164%2030.2316%2076.1466%2030.9339%2076.1464ZM54.2552%2069.3622C55.1918%2069.3623%2055.9515%2070.1219%2055.9515%2071.0585C55.9514%2071.995%2055.1918%2072.7546%2054.2552%2072.7548C53.3186%2072.7548%2052.559%2071.9951%2052.5589%2071.0585C52.5589%2070.1218%2053.3185%2069.3622%2054.2552%2069.3622ZM26.1986%2024.9472V68.4081C27.1726%2068.408%2028.1328%2068.2265%2029.1068%2068.2059C33.1953%2068.1198%2036.9129%2068.347%2040.8265%2069.6776C41.7311%2069.9852%2042.6337%2070.2978%2043.5492%2070.5712C43.5492%2070.2524%2043.5492%2070.0595%2043.5492%2069.8671C43.5491%2066.4754%2043.5281%2063.0835%2043.5658%2059.6923C43.6004%2056.5762%2044.978%2053.1745%2046.8607%2050.6893C47.681%2049.6066%2048.5637%2048.6225%2049.6693%2047.8388C50.3616%2047.348%2051.0334%2046.8597%2051.8031%2046.495C53.1145%2045.8736%2054.3323%2045.4158%2055.7376%2045.0731C57.0717%2044.7479%2058.2439%2044.4825%2059.6361%2044.6229C59.8015%2044.6396%2060.0647%2044.9848%2060.0599%2045.1737C60.0373%2046.0307%2059.9906%2046.8955%2059.8431%2047.7382C59.1797%2051.5279%2056.929%2055.3513%2053.8861%2057.7001C52.858%2058.4936%2051.6633%2058.9731%2050.4779%2059.5077C49.6796%2059.8677%2046.7176%2060.2213%2046.723%2061.2255C46.736%2063.6632%2046.7291%2066.1011%2046.7318%2068.5389C46.7319%2068.6663%2046.7605%2068.7938%2046.7826%2068.9735C49.106%2066.9459%2051.2337%2064.8799%2053.7757%2063.1317C55.3358%2062.0589%2056.8511%2061.1257%2058.5638%2060.3055C60.1716%2059.5356%2061.7663%2058.7317%2063.4095%2058.0448C66.0165%2056.955%2068.7942%2056.2957%2071.5453%2055.6972C72.3804%2055.5155%2073.2266%2055.368%2074.0755%2055.2714C75.0492%2055.1606%2076.0307%2055.0843%2077.0101%2055.0604C78.4267%2055.0259%2079.8455%2055.0247%2081.2621%2055.0595C83.378%2055.1113%2085.4497%2055.2173%2087.5433%2055.5194C87.1392%2053.5032%2087.3785%2051.4086%2086.8324%2049.4218C86.449%2048.0267%2086.1791%2046.6089%2085.7357%2045.2245C85.1359%2043.3519%2084.2964%2041.7211%2083.4124%2039.9725C82.6786%2038.5208%2081.6833%2037.2438%2080.7044%2035.9628C80.0389%2035.0918%2079.2497%2034.3146%2078.4632%2033.4413C77.3195%2032.325%2076.0504%2031.3683%2074.7552%2030.4296C74.0445%2029.9145%2073.3124%2029.4205%2072.5521%2028.9833C71.652%2028.4658%2070.7127%2028.015%2069.7865%2027.5438C68.4265%2026.852%2066.9442%2026.428%2065.4818%2026.0116C63.8367%2025.5432%2061.8562%2024.9687%2060.1361%2024.9647C48.8236%2024.939%2037.511%2024.9472%2026.1986%2024.9472ZM79.2718%2060.8827C80.2084%2060.8829%2080.9671%2061.6424%2080.9671%2062.579C80.967%2063.5154%2080.2083%2064.2741%2079.2718%2064.2743C78.3352%2064.2743%2077.5757%2063.5155%2077.5755%2062.579C77.5755%2061.6423%2078.3351%2060.8827%2079.2718%2060.8827ZM69.307%2061.0936C70.0095%2061.0936%2070.5794%2061.6636%2070.5794%2062.3661C70.5794%2063.0686%2070.0095%2063.6386%2069.307%2063.6386C68.6045%2063.6384%2068.0355%2063.0686%2068.0355%2062.3661C68.0355%2061.6636%2068.6046%2061.0937%2069.307%2061.0936ZM32.6986%2043.6014C37.0362%2043.7228%2040.5725%2047.4123%2041.5892%2051.4159C41.7637%2052.1032%2041.7969%2052.8323%2041.8402%2053.5458C42.15%2058.672%2024.8958%2043.3836%2032.6986%2043.6014ZM43.681%2028.9628C44.4764%2027.9441%2045.17%2028.1538%2045.8099%2029.0106C50.3991%2035.1571%2049.9514%2042.0039%2045.43%2048.2177C45.1507%2048.601%2044.2945%2048.5841%2044.0111%2048.2313C39.3117%2042.3799%2038.9656%2035.0033%2043.681%2028.9628ZM58.6673%2029.2587C60.0854%2028.4453%2064.4016%2030.135%2066.183%2030.9364C71.9786%2033.5437%2077.8232%2037.6085%2080.3734%2043.6854C80.6692%2044.3901%2081.1847%2045.0658%2081.0902%2045.9423C80.9302%2047.4238%2078.5368%2048.4396%2077.6312%2047.0204C72.806%2038.9395%2071.4255%2036.5582%2063.2621%2034.0585C62.2382%2033.7449%2054.2182%2031.1043%2058.6673%2029.2587Z%22%20fill%3D%22white%22/%3E%0A%3C/svg%3E%0A" alt="DigiFarm"/>
+  </div>
+  <div class="nav-section-label">Foundation</div>
+  <a href="#colors" class="active">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing & Radius</a>
+  <div class="nav-section-label">Components</div>
+  <a href="#buttons">Buttons</a>
+  <a href="#inputs">Inputs & Forms</a>
+  <a href="#badges">Badges & Tags</a>
+  <a href="#cards">Cards & Surfaces</a>
+  <a href="#alerts">Alerts</a>
+  <div class="nav-section-label">Patterns</div>
+  <a href="#map-ui">Map UI Elements</a>
+  <a href="#variables">CSS Variables</a>
+</nav>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-title">DigiFarm UI Guidelines <span class="version-pill">v1.0</span></div>
+    <div class="page-subtitle">Design system for all client-facing demos and internal tools. All components use the same tokens — dark, satellite-first aesthetic with agricultural green as the primary action color.</div>
+  </div>
+
+  <!-- COLORS -->
+  <section id="colors">
+    <div class="section-label">Foundation</div>
+    <h2>Colors</h2>
+    <p class="section-desc">The palette is built for dark, satellite-first interfaces. Backgrounds layer from deepest to lightest. Green is the primary action and brand color; purple is used for secondary accents.</p>
+    <hr/>
+
+    <div class="card-label" style="margin-bottom:12px;">Backgrounds</div>
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0E1621;border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Main Background</div>
+          <div class="swatch-role">--bg · base layer</div>
+          <div class="swatch-hex">#0E1621</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#17212B;border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface / Panels</div>
+          <div class="swatch-role">--bg2 · cards, sidebars</div>
+          <div class="swatch-hex">#17212B</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1D2B39;border-bottom:1px solid rgba(255,255,255,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Elevated Surface</div>
+          <div class="swatch-role">--bg3 · hover states, rows</div>
+          <div class="swatch-hex">#1D2B39</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-label" style="margin-bottom:12px;">Brand & Accent</div>
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#009463;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Green</div>
+          <div class="swatch-role">--green · primary action</div>
+          <div class="swatch-hex">#009463</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#9C7FEF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Purple</div>
+          <div class="swatch-role">--purple · secondary accent</div>
+          <div class="swatch-hex">#9C7FEF</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FFFFFF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Text</div>
+          <div class="swatch-role">--white · headings, values</div>
+          <div class="swatch-hex">#FFFFFF</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#8697A8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Secondary Text</div>
+          <div class="swatch-role">--muted · labels, hints</div>
+          <div class="swatch-hex">#8697A8</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-label" style="margin-bottom:12px;">Semantic Colors</div>
+    <div class="grid-4">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#009463;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Success</div>
+          <div class="swatch-role">positive states, high conf.</div>
+          <div class="swatch-hex">#009463</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EA891D;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warning</div>
+          <div class="swatch-role">medium confidence</div>
+          <div class="swatch-hex">#EA891D</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F84A4A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Error / Alert</div>
+          <div class="swatch-role">errors, low confidence</div>
+          <div class="swatch-hex">#F84A4A</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4DB5FA;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Info</div>
+          <div class="swatch-role">informational states</div>
+          <div class="swatch-hex">#4DB5FA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="typography">
+    <div class="section-label">Foundation</div>
+    <h2>Typography</h2>
+    <p class="section-desc">Two typefaces only. Inter for all UI text — no large display sizes, h1 caps at 20px. IBM Plex Mono for captions, metadata, code, and numeric values.</p>
+    <hr/>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-label">Inter — Primary UI Font</div>
+      <div class="type-row">
+        <div class="type-meta">H1 / Page Title<br/>Inter 600 · 20px<br/>–0.2px tracking</div>
+        <div class="type-sample" style="font-size:20px;font-weight:600;color:var(--white);letter-spacing:-0.2px;">Field Boundary Detection</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">H2 / Section<br/>Inter 600 · 16px</div>
+        <div class="type-sample" style="font-size:16px;font-weight:600;color:var(--white);">Detection Summary</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body / Default<br/>Inter 400 · 14px<br/>line-height 1.6</div>
+        <div class="type-sample" style="font-size:14px;font-weight:400;color:var(--muted);">The model detected 34 field boundaries across the selected region with an average confidence of 94.2%.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body Small<br/>Inter 400 · 13px</div>
+        <div class="type-sample" style="font-size:13px;color:var(--muted);">Last updated March 14, 2026 · Bavaria, Germany</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Label<br/>Inter 500 · 12px</div>
+        <div class="type-sample" style="font-size:12px;font-weight:500;color:var(--white);">Model Active</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">IBM Plex Mono — Captions, Metadata & Values</div>
+      <div class="type-row">
+        <div class="type-meta">Section Label<br/>Mono 400 · 11px<br/>0.12em tracking, UPPER</div>
+        <div class="type-sample" style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);">Field Boundaries</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Caption / Hint<br/>Mono 300 · 12px</div>
+        <div class="type-sample" style="font-family:var(--mono);font-size:12px;font-weight:300;color:var(--muted);">94.2% boundary accuracy · 5 crop types detected</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Numeric Value<br/>Mono 500 · 12px</div>
+        <div class="type-sample" style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--white);">247.4 ha &nbsp;·&nbsp; 34 fields &nbsp;·&nbsp; 7.3 ha avg</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Coordinate<br/>Mono 400 · 11px</div>
+        <div class="type-sample" style="font-family:var(--mono);font-size:11px;color:var(--muted);">48.3650° N, 11.0350° E &nbsp;·&nbsp; zoom 12.5</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACING & RADIUS -->
+  <section id="spacing">
+    <div class="section-label">Foundation</div>
+    <h2>Spacing & Radius</h2>
+    <p class="section-desc">A consistent 4px base grid. Border radius is universally 4px — applied to all elements that need rounding.</p>
+    <hr/>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Spacing Scale (4px base)</div>
+        <div style="margin-top:4px;">
+          <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">4px · xs</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">tight gaps, icon padding</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">8px · sm</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">inline gaps, badge padding</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">12px · md</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">component padding</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">16px · lg</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">section padding, card inner</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">24px · xl</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">panel padding, card gap</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">32px · 2xl</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">page sections, page header</span></div>
+          <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">48px · 3xl</div><span style="font-family:var(--mono);font-size:11px;color:var(--muted);">major layout gaps</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Border Radius — 4px Universal</div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:20px;">
+          <div class="radius-demo">
+            <div class="radius-box" style="width:80px;height:40px;border-radius:0;">0px</div>
+            <div style="font-size:12px;color:var(--muted);">Never — hard corners are not used</div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="width:80px;height:40px;border-radius:4px;">4px ✓</div>
+            <div style="font-size:12px;color:var(--white);">All elements — buttons, cards, inputs, badges, tooltips, panels</div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="width:48px;height:24px;border-radius:12px;font-size:10px;">pill</div>
+            <div style="font-size:12px;color:var(--muted);">Pill (full-radius) — only for live status indicators</div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="width:32px;height:32px;border-radius:50%;font-size:10px;">50%</div>
+            <div style="font-size:12px;color:var(--muted);">Circle — toggle knobs, dot indicators only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section id="buttons">
+    <div class="section-label">Components</div>
+    <h2>Buttons</h2>
+    <p class="section-desc">Four variants, three sizes. All 4px radius. Primary uses brand green. Never use more than one primary button per panel context.</p>
+    <hr/>
+
+    <div class="card">
+      <div class="comp-row">
+        <div class="comp-label">Variants</div>
+        <button class="btn-primary">Primary</button>
+        <button class="btn-secondary">Secondary</button>
+        <button class="btn-ghost">Ghost / Outlined</button>
+        <button class="btn-danger">Destructive</button>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Sizes</div>
+        <button class="btn-primary btn-sm">Small</button>
+        <button class="btn-primary">Default</button>
+        <button class="btn-primary btn-lg">Large</button>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">States</div>
+        <button class="btn-primary">Active</button>
+        <button class="btn-primary" style="opacity:0.4;cursor:not-allowed;">Disabled</button>
+        <button class="btn-secondary" style="border-color:var(--green);color:var(--green);">Focused</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INPUTS -->
+  <section id="inputs">
+    <div class="section-label">Components</div>
+    <h2>Inputs & Forms</h2>
+    <p class="section-desc">All inputs use bg2 fill, 1px border at 10% white. Focus state switches border to brand green. Error state uses semantic red.</p>
+    <hr/>
+
+    <div class="card">
+      <div class="comp-row">
+        <div class="comp-label">Text Input States</div>
+        <input class="input-demo" type="text" placeholder="Default state"/>
+        <input class="input-demo" type="text" value="Focused state" style="border-color:var(--green);"/>
+        <input class="input-demo error" type="text" value="Error state"/>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Input with Icons</div>
+        <div class="input-wrap has-left">
+          <span class="input-icon input-icon-left"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input class="input-demo" type="text" placeholder="Search fields..."/>
+        </div>
+        <div class="input-wrap has-right">
+          <input class="input-demo" type="text" placeholder="Select date"/>
+          <span class="input-icon input-icon-right"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        </div>
+        <div class="input-wrap has-both">
+          <span class="input-icon input-icon-left"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input class="input-demo" type="text" value="Wheat Maize"/>
+          <span class="input-icon input-icon-right"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+        </div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Slider</div>
+        <div class="slider-track-wrap">
+          <div class="slider-labels"><span>0%</span><span>Confidence Threshold</span><span>100%</span></div>
+          <input type="range" class="slider-demo" value="72" min="0" max="100"/>
+          <div class="slider-labels"><span style="color:var(--white);font-weight:500;">72%</span><span></span><span></span></div>
+        </div>
+        <div class="slider-track-wrap" style="margin-left:16px;">
+          <div class="slider-labels"><span>1 ha</span><span>Min Field Size</span><span>50 ha</span></div>
+          <input type="range" class="slider-demo" value="30" min="0" max="100"/>
+          <div class="slider-labels"><span style="color:var(--white);font-weight:500;">15 ha</span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Select</div>
+        <select class="input-demo" style="cursor:pointer;padding-right:40px;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath d=%22M2 4l4 4 4-4%22 stroke=%22%238697A8%22 stroke-width=%221.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;">
+          <option>All Crop Types</option>
+          <option>Winter Wheat</option>
+          <option>Rapeseed</option>
+        </select>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Toggle Switch</div>
+        <div class="toggle-demo on"></div>
+        <div class="toggle-demo"></div>
+        <span style="font-size:12px;color:var(--muted);margin-left:6px;">Used for layer visibility, feature flags</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <section id="badges">
+    <div class="section-label">Components</div>
+    <h2>Badges & Tags</h2>
+    <p class="section-desc">IBM Plex Mono 11px. Used for status, confidence levels, crop types, and model state. All 4px radius.</p>
+    <hr/>
+
+    <div class="card">
+      <div class="comp-row">
+        <div class="comp-label">Status</div>
+        <span class="badge badge-green"><span class="badge-dot"></span>Model Active</span>
+        <span class="badge badge-amber"><span class="badge-dot"></span>Processing</span>
+        <span class="badge badge-red"><span class="badge-dot"></span>Offline</span>
+        <span class="badge badge-purple"><span class="badge-dot"></span>Beta</span>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">Confidence</div>
+        <span class="badge badge-green">96.1% High</span>
+        <span class="badge badge-amber">81.4% Medium</span>
+        <span class="badge badge-red">61.2% Low</span>
+      </div>
+      <div class="comp-row" style="flex-wrap:wrap;row-gap:8px;">
+        <div class="comp-label">Crop Tags</div>
+        <span class="badge" style="background:rgba(0,148,99,0.12);color:#009463;border:1px solid rgba(0,148,99,0.3);">Lentil</span>
+        <span class="badge" style="background:rgba(234,137,29,0.12);color:#EA891D;border:1px solid rgba(234,137,29,0.25);">Cotton</span>
+        <span class="badge" style="background:rgba(77,181,250,0.12);color:#4DB5FA;border:1px solid rgba(77,181,250,0.25);">Wheat Maize</span>
+        <span class="badge" style="background:rgba(156,127,239,0.12);color:#9C7FEF;border:1px solid rgba(156,127,239,0.25);">Wheat</span>
+        <span class="badge" style="background:rgba(248,74,74,0.12);color:#F84A4A;border:1px solid rgba(248,74,74,0.25);">Lentil Maize</span>
+        <span class="badge" style="background:rgba(248,180,60,0.12);color:#F8B43C;border:1px solid rgba(248,180,60,0.25);">Undefined</span>
+        <span class="badge" style="background:rgba(52,211,153,0.12);color:#34D399;border:1px solid rgba(52,211,153,0.25);">Maize</span>
+        <span class="badge" style="background:rgba(251,113,133,0.12);color:#FB7185;border:1px solid rgba(251,113,133,0.25);">Wheat Cotton</span>
+        <span class="badge" style="background:rgba(45,212,191,0.12);color:#2DD4BF;border:1px solid rgba(45,212,191,0.25);">Clover</span>
+        <span class="badge" style="background:rgba(192,132,252,0.12);color:#C084FC;border:1px solid rgba(192,132,252,0.25);">Winter Wheat</span>
+        <span class="badge" style="background:rgba(251,146,60,0.12);color:#FB923C;border:1px solid rgba(251,146,60,0.25);">Rapeseed</span>
+        <span class="badge" style="background:rgba(56,189,248,0.12);color:#38BDF8;border:1px solid rgba(56,189,248,0.25);">Sugar Beet</span>
+        <span class="badge" style="background:rgba(163,230,53,0.12);color:#A3E635;border:1px solid rgba(163,230,53,0.25);">Barley</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section id="cards">
+    <div class="section-label">Components</div>
+    <h2>Cards & Surfaces</h2>
+    <p class="section-desc">Three surface types. Standard card uses bg2 with 6% white border. Elevated uses bg3. Blur surface uses backdrop-filter for map overlays.</p>
+    <hr/>
+
+    <div class="grid-3" style="align-items:start;">
+      <div>
+        <div class="card-label" style="margin-bottom:8px;">Standard Card</div>
+        <div class="demo-card">
+          <div class="demo-card-label">Total Area</div>
+          <div class="demo-card-val">247 <span style="font-size:13px;font-weight:400;color:var(--muted);">ha</span></div>
+          <div class="demo-card-sub">Across 34 detected fields</div>
+        </div>
+      </div>
+      <div>
+        <div class="card-label" style="margin-bottom:8px;">Elevated (bg3)</div>
+        <div class="demo-card" style="background:var(--bg3);">
+          <div class="demo-card-label">Avg Field Size</div>
+          <div class="demo-card-val">7.3 <span style="font-size:13px;font-weight:400;color:var(--muted);">ha</span></div>
+          <div class="demo-card-sub">Range: 2.1 – 14.8 ha</div>
+        </div>
+      </div>
+      <div>
+        <div class="card-label" style="margin-bottom:8px;">Blur Surface (map overlays)</div>
+        <div class="blur-surface">
+          <div class="demo-card-label">Model Confidence</div>
+          <div class="demo-card-val">94.2<span style="font-size:13px;font-weight:400;color:var(--muted);">%</span></div>
+          <div class="demo-card-sub">bg: rgba(23,33,43,0.7) + blur(16px)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALERTS -->
+  <section id="alerts">
+    <div class="section-label">Components</div>
+    <h2>Alerts</h2>
+    <p class="section-desc">Inline notifications and feedback messages. Semantic color system with matching border and background tint.</p>
+    <hr/>
+
+    <div class="card">
+      <div class="alert alert-green"><span class="alert-icon">✓</span><span>Model processing complete. 34 field boundaries detected with 94.2% average confidence.</span></div>
+      <div class="alert alert-amber"><span class="alert-icon">⚠</span><span>Cloud coverage detected in northwest quadrant. Results may have reduced accuracy in affected area.</span></div>
+      <div class="alert alert-red"><span class="alert-icon">✕</span><span>Satellite imagery unavailable for the selected date range. Please try a different time window.</span></div>
+    </div>
+  </section>
+
+  <!-- MAP UI -->
+  <section id="map-ui">
+    <div class="section-label">Patterns</div>
+    <h2>Map UI Elements</h2>
+    <p class="section-desc">Specific patterns for map overlay panels, layer controls, and coordinate display. All map panels use the blur surface style.</p>
+    <hr/>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-label">Header Bar Pattern</div>
+      <div class="header-demo" style="margin-top:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="data:image/svg+xml,%3Csvg%20width%3D%22431%22%20height%3D%22108%22%20viewBox%3D%220%200%20431%20108%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%3Cpath%20d%3D%22M268.295%2079.0741V25.2651H301.663V32.254H276.413V48.6489H299.272V55.6115H276.413V79.0741H268.295Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M318.432%2079.9674C315.874%2079.9674%20313.562%2079.4944%20311.495%2078.5486C309.428%2077.5852%20307.791%2076.1927%20306.582%2074.371C305.391%2072.5494%20304.795%2070.3161%20304.795%2067.6712C304.795%2065.3941%20305.233%2063.5199%20306.109%2062.0486C306.985%2060.5772%20308.167%2059.4124%20309.656%2058.5541C311.145%2057.6959%20312.809%2057.0478%20314.648%2056.6099C316.487%2056.172%20318.361%2055.8392%20320.271%2055.6115C322.688%2055.3312%20324.65%2055.1035%20326.156%2054.9284C327.662%2054.7357%20328.757%2054.4291%20329.44%2054.0088C330.123%2053.5884%20330.465%2052.9053%20330.465%2051.9594V51.7755C330.465%2049.4809%20329.817%2047.703%20328.521%2046.4419C327.242%2045.1807%20325.333%2044.5502%20322.793%2044.5502C320.148%2044.5502%20318.064%2045.1369%20316.54%2046.3105C315.033%2047.4666%20313.991%2048.754%20313.413%2050.1728L306.03%2048.4913C306.906%2046.039%20308.185%2044.0597%20309.866%2042.5534C311.565%2041.0295%20313.518%2039.926%20315.725%2039.2428C317.932%2038.5422%20320.253%2038.1919%20322.688%2038.1919C324.299%2038.1919%20326.007%2038.3846%20327.811%2038.7699C329.633%2039.1377%20331.332%2039.8209%20332.908%2040.8193C334.502%2041.8177%20335.807%2043.2452%20336.823%2045.1019C337.839%2046.9411%20338.347%2049.332%20338.347%2052.2747V79.0741H330.675V73.5565H330.36C329.852%2074.5725%20329.09%2075.5709%20328.074%2076.5518C327.058%2077.5326%20325.753%2078.3471%20324.159%2078.9952C322.565%2079.6433%20320.656%2079.9674%20318.432%2079.9674ZM320.139%2073.6616C322.311%2073.6616%20324.168%2073.2325%20325.709%2072.3742C327.268%2071.5159%20328.451%2070.3949%20329.256%2069.0112C330.08%2067.6099%20330.491%2066.1123%20330.491%2064.5183V59.3161C330.211%2059.5963%20329.668%2059.8591%20328.862%2060.1043C328.074%2060.332%20327.172%2060.5334%20326.156%2060.7086C325.14%2060.8663%20324.15%2061.0151%20323.187%2061.1553C322.224%2061.2779%20321.418%2061.383%20320.77%2061.4705C319.246%2061.6632%20317.853%2061.9873%20316.592%2062.4427C315.349%2062.8981%20314.35%2063.5549%20313.597%2064.4132C312.861%2065.254%20312.494%2066.375%20312.494%2067.7763C312.494%2069.7206%20313.212%2071.1919%20314.648%2072.1903C316.084%2073.1712%20317.915%2073.6616%20320.139%2073.6616Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M348.024%2079.0741V38.7174H355.617V45.1282H356.037C356.773%2042.9562%20358.069%2041.2484%20359.926%2040.0048C361.8%2038.7436%20363.919%2038.1131%20366.284%2038.1131C366.774%2038.1131%20367.352%2038.1306%20368.018%2038.1656C368.701%2038.2006%20369.235%2038.2444%20369.621%2038.297V45.8113C369.305%2045.7237%20368.745%2045.6274%20367.939%2045.5223C367.133%2045.3997%20366.328%2045.3384%20365.522%2045.3384C363.665%2045.3384%20362.01%2045.7325%20360.556%2046.5207C359.12%2047.2914%20357.981%2048.3686%20357.141%2049.7524C356.3%2051.1186%20355.879%2052.6776%20355.879%2054.4291V79.0741H348.024Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M375.632%2079.0741V38.7174H383.173V45.2858H383.672C384.513%2043.0613%20385.888%2041.3272%20387.797%2040.0836C389.706%2038.8225%20391.992%2038.1919%20394.654%2038.1919C397.352%2038.1919%20399.611%2038.8225%20401.433%2040.0836C403.272%2041.3448%20404.63%2043.0788%20405.505%2045.2858H405.926C406.889%2043.1314%20408.422%2041.4148%20410.524%2040.1362C412.626%2038.84%20415.13%2038.1919%20418.038%2038.1919C421.699%2038.1919%20424.685%2039.3392%20426.997%2041.6338C429.327%2043.9284%20430.492%2047.3877%20430.492%2052.012V79.0741H422.636V52.7476C422.636%2050.0151%20421.892%2048.0358%20420.403%2046.8097C418.914%2045.5836%20417.136%2044.9706%20415.069%2044.9706C412.512%2044.9706%20410.524%2045.7588%20409.105%2047.3352C407.686%2048.8941%20406.977%2050.8997%20406.977%2053.3519V79.0741H399.147V52.2484C399.147%2050.0589%20398.464%2048.2986%20397.098%2046.9674C395.732%2045.6362%20393.954%2044.9706%20391.764%2044.9706C390.275%2044.9706%20388.9%2045.3647%20387.639%2046.1529C386.396%2046.9236%20385.388%2048.0008%20384.618%2049.3846C383.864%2050.7683%20383.488%2052.371%20383.488%2054.1927V79.0741H375.632Z%22%20fill%3D%22%23949EA7%22/%3E%0A%3Cpath%20d%3D%22M146.726%2079.0654H129.306V25.2565H147.277C152.55%2025.2565%20157.078%2026.3337%20160.861%2028.4882C164.644%2030.6251%20167.543%2033.6992%20169.558%2037.7103C171.589%2041.704%20172.605%2046.4946%20172.605%2052.0821C172.605%2057.6872%20171.581%2062.5041%20169.531%2066.5328C167.499%2070.5614%20164.557%2073.6618%20160.703%2075.8337C156.85%2077.9882%20152.191%2079.0654%20146.726%2079.0654ZM137.425%2071.9715H146.279C150.378%2071.9715%20153.785%2071.2008%20156.499%2069.6594C159.214%2068.1005%20161.246%2065.8497%20162.595%2062.907C163.944%2059.9468%20164.618%2056.3385%20164.618%2052.0821C164.618%2047.8608%20163.944%2044.2788%20162.595%2041.3361C161.264%2038.3935%20159.276%2036.1602%20156.631%2034.6363C153.986%2033.1124%20150.702%2032.3505%20146.778%2032.3505H137.425V71.9715Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M182.071%2079.0654V38.7087H189.926V79.0654H182.071ZM186.038%2032.4818C184.672%2032.4818%20183.498%2032.0264%20182.517%2031.1156C181.554%2030.1872%20181.072%2029.0837%20181.072%2027.8051C181.072%2026.5089%20181.554%2025.4054%20182.517%2024.4946C183.498%2023.5662%20184.672%2023.1021%20186.038%2023.1021C187.404%2023.1021%20188.569%2023.5662%20189.532%2024.4946C190.513%2025.4054%20191.004%2026.5089%20191.004%2027.8051C191.004%2029.0837%20190.513%2030.1872%20189.532%2031.1156C188.569%2032.0264%20187.404%2032.4818%20186.038%2032.4818Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M217.415%2095.0399C214.21%2095.0399%20211.451%2094.6196%20209.139%2093.7788C206.845%2092.938%20204.97%2091.8258%20203.517%2090.442C202.063%2089.0583%20200.977%2087.5431%20200.259%2085.8966L207.011%2083.1116C207.484%2083.8823%20208.115%2084.6968%20208.903%2085.5551C209.708%2086.4309%20210.794%2087.1753%20212.161%2087.7884C213.544%2088.4014%20215.322%2088.7079%20217.494%2088.7079C220.472%2088.7079%20222.933%2087.981%20224.877%2086.5272C226.822%2085.0909%20227.794%2082.7963%20227.794%2079.6434V71.7087H227.294C226.822%2072.567%20226.138%2073.5216%20225.245%2074.5726C224.369%2075.6235%20223.161%2076.5344%20221.619%2077.3051C220.078%2078.0758%20218.072%2078.4611%20215.603%2078.4611C212.415%2078.4611%20209.542%2077.7167%20206.985%2076.2278C204.445%2074.7215%20202.431%2072.5057%20200.942%2069.5805C199.47%2066.6379%20198.735%2063.0208%20198.735%2058.7294C198.735%2054.438%20199.462%2050.7597%20200.915%2047.6944C202.387%2044.6291%20204.401%2042.282%20206.958%2040.653C209.516%2039.0065%20212.415%2038.1833%20215.655%2038.1833C218.16%2038.1833%20220.183%2038.6036%20221.724%2039.4444C223.266%2040.2677%20224.466%2041.231%20225.324%2042.3345C226.2%2043.438%20226.874%2044.4102%20227.347%2045.2509H227.925V38.7087H235.623V79.9587C235.623%2083.4269%20234.818%2086.2732%20233.206%2088.4977C231.595%2090.7223%20229.414%2092.3688%20226.664%2093.4372C223.931%2094.5057%20220.849%2095.0399%20217.415%2095.0399ZM217.337%2071.9452C219.596%2071.9452%20221.505%2071.4197%20223.064%2070.3688C224.641%2069.3003%20225.832%2067.7764%20226.638%2065.7971C227.461%2063.8003%20227.873%2061.4094%20227.873%2058.6243C227.873%2055.9094%20227.47%2053.5185%20226.664%2051.4516C225.858%2049.3847%20224.676%2047.7732%20223.117%2046.6172C221.558%2045.4436%20219.631%2044.8568%20217.337%2044.8568C214.972%2044.8568%20213.001%2045.4699%20211.425%2046.696C209.849%2047.9046%20208.658%2049.5511%20207.852%2051.6355C207.064%2053.7199%20206.669%2056.0495%20206.669%2058.6243C206.669%2061.2692%20207.072%2063.5901%20207.878%2065.5869C208.684%2067.5837%20209.875%2069.1427%20211.451%2070.2637C213.045%2071.3847%20215.007%2071.9452%20217.337%2071.9452Z%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M246.159%2079.0654V38.7087H254.015V79.0654H246.159ZM250.126%2032.4818C248.76%2032.4818%20247.587%2032.0264%20246.606%2031.1156C245.642%2030.1872%20245.161%2029.0837%20245.161%2027.8051C245.161%2026.5089%20245.642%2025.4054%20246.606%2024.4946C247.587%2023.5662%20248.76%2023.1021%20250.126%2023.1021C251.493%2023.1021%20252.658%2023.5662%20253.621%2024.4946C254.602%2025.4054%20255.092%2026.5089%20255.092%2027.8051C255.092%2029.0837%20254.602%2030.1872%20253.621%2031.1156C252.658%2032.0264%20251.493%2032.4818%20250.126%2032.4818Z%22%20fill%3D%22%23009463%22/%3E%0A%3Crect%20x%3D%220.0580139%22%20width%3D%22108%22%20height%3D%22108%22%20fill%3D%22%23009463%22/%3E%0A%3Cpath%20d%3D%22M27.0921%2021.1278C37.4479%2021.131%2047.8462%2020.844%2058.1976%2021.1249C60.4031%2021.1847%2062.6955%2021.3483%2064.8675%2021.7763C66.5852%2022.1147%2068.2856%2022.7958%2069.9066%2023.4403C71.8263%2024.2035%2073.6253%2024.9833%2075.3499%2026.1151C76.0751%2026.5911%2076.7991%2027.0709%2077.5062%2027.5731C78.033%2027.9473%2078.5601%2028.3292%2079.0384%2028.7616C80.1918%2029.8042%2081.3395%2030.8553%2082.4427%2031.9501C82.9902%2032.4934%2083.4552%2033.1252%2083.9203%2033.745C84.5693%2034.61%2085.2042%2035.4876%2085.808%2036.3847C86.6833%2037.6852%2087.4501%2039.0494%2088.0804%2040.4882C88.7472%2042.01%2089.3558%2043.4134%2089.7679%2045.0194C90.3292%2047.207%2090.7293%2049.2229%2091.0453%2051.4472C91.3189%2053.3737%2091.2625%2055.3105%2091.2406%2057.244C91.2289%2058.2755%2091.1423%2059.3097%2091.0296%2060.3358C90.9364%2061.1843%2090.766%2062.0256%2090.6097%2062.8661C90.485%2063.537%2090.3751%2064.2161%2090.1781%2064.8671C89.8682%2065.8907%2089.4571%2066.8838%2089.1497%2067.9081C87.5716%2073.1685%2083.9976%2078.0652%2079.848%2081.5761C77.54%2083.5288%2075.0545%2085.0355%2072.4076%2086.4901C68.4%2088.6923%2063.7014%2089.397%2059.224%2089.8495C55.2705%2090.249%2051.3154%2089.9542%2047.3626%2090.0194C40.4316%2090.1338%2033.4719%2090.1373%2026.5404%2090.0126C25.741%2089.9982%2024.9725%2089.7114%2024.2308%2089.2997C23.4388%2088.8601%2023.0381%2088.1761%2022.6234%2087.4638C22.5199%2087.286%2022.4945%2087.0622%2022.391%2086.8563C22.3485%2065.968%2022.3486%2045.083%2022.391%2024.1444C22.3954%2021.979%2023.9383%2021.1278%2027.0921%2021.1278ZM82.4056%2072.6141C79.0364%2071.7942%2073.9153%2072.3715%2070.7455%2073.6884C69.7488%2074.1024%2068.6915%2074.3713%2067.6937%2074.7831C66.7709%2075.1639%2065.8641%2075.603%2065.0013%2076.1044C60.7274%2078.588%2057.7821%2082.0425%2054.9447%2085.9686C56.7004%2086.171%2058.5528%2086.0037%2060.3197%2086.0038C62.9305%2086.004%2066.0971%2085.0052%2068.5023%2084.0507C69.7336%2083.562%2071.0336%2082.9916%2072.1624%2082.2899C73.4612%2081.4827%2074.7818%2080.6165%2076.0042%2079.6972C76.5814%2079.2631%2077.1158%2078.7717%2077.6956%2078.2284C79.4792%2076.5877%2081.0725%2074.7879%2082.4056%2072.6141ZM42.2347%2074.33C37.0927%2072.2035%2031.7704%2071.3718%2026.1644%2072.6005V86.0028C29.4437%2086.0028%2032.6397%2086.0061%2035.8353%2085.9911C35.9906%2085.9904%2036.2207%2085.863%2036.2865%2085.7304C37.1652%2083.9587%2037.7957%2082.0549%2038.6732%2080.2704C39.358%2078.8779%2040.141%2077.6557%2040.9867%2076.3573C41.4038%2075.7168%2041.7898%2075.0557%2042.2347%2074.33ZM77.7396%2058.868C72.9252%2059.2335%2067.9634%2060.0684%2063.5345%2062.1024C62.2942%2062.6721%2061.0839%2063.3112%2059.8792%2063.955C58.9477%2064.4527%2058.0247%2064.9717%2057.1331%2065.537C56.383%2066.0126%2055.6837%2066.5689%2054.9622%2067.0897C54.1924%2067.6454%2053.4077%2068.1824%2052.6576%2068.7636C52.0735%2069.216%2051.48%2069.6756%2050.9828%2070.2167C49.3168%2072.0297%2047.6972%2073.8296%2046.1009%2075.7108C45.0631%2076.9338%2044.2282%2078.2679%2043.4281%2079.6561C42.9655%2080.4586%2042.4895%2081.2546%2042.0589%2082.0741C41.6161%2082.9168%2041.2051%2083.7773%2040.8119%2084.6444C40.6227%2085.0615%2040.5063%2085.512%2040.3382%2086.0028C43.7138%2086.0028%2046.9799%2086.0066%2050.2455%2085.9891C50.4106%2085.9883%2050.6476%2085.8387%2050.7269%2085.6913C51.8683%2083.5585%2053.1357%2081.1891%2054.8499%2079.4696C59.342%2074.9637%2064.0777%2071.5786%2070.2201%2069.6962C74.2076%2068.4742%2078.7688%2068.0201%2082.8968%2068.6395C83.4583%2068.7238%2084.0179%2068.8219%2084.6742%2068.9305C85.2104%2067.2867%2085.7036%2065.7298%2086.2269%2064.1835C86.7609%2062.6053%2086.9598%2060.9678%2087.2054%2059.4013C86.5853%2059.2857%2086.0413%2059.1467%2085.4896%2059.0907C84.4979%2058.9901%2083.5019%2058.8991%2082.5062%2058.8768C80.953%2058.8421%2079.3984%2058.8681%2077.7396%2058.868ZM49.8031%2079.9628C50.5054%2079.963%2051.0746%2080.5328%2051.0746%2081.2352C51.0744%2081.9375%2050.5054%2082.5065%2049.8031%2082.5067C49.1006%2082.5067%2048.5307%2081.9377%2048.5306%2081.2352C48.5306%2080.5327%2049.1005%2079.9628%2049.8031%2079.9628ZM68.6703%2075.7235C69.6068%2075.7235%2070.3664%2076.4823%2070.3665%2077.4188C70.3665%2078.3555%2069.607%2079.1151%2068.6703%2079.1151C67.7337%2079.1149%2066.9749%2078.3554%2066.9749%2077.4188C66.9751%2076.4824%2067.7338%2075.7237%2068.6703%2075.7235ZM30.9339%2076.1464C31.6365%2076.1464%2032.2064%2076.7163%2032.2064%2077.4188C32.2063%2078.1213%2031.6364%2078.6903%2030.9339%2078.6903C30.2317%2078.6901%2029.6626%2078.1211%2029.6624%2077.4188C29.6624%2076.7164%2030.2316%2076.1466%2030.9339%2076.1464ZM54.2552%2069.3622C55.1918%2069.3623%2055.9515%2070.1219%2055.9515%2071.0585C55.9514%2071.995%2055.1918%2072.7546%2054.2552%2072.7548C53.3186%2072.7548%2052.559%2071.9951%2052.5589%2071.0585C52.5589%2070.1218%2053.3185%2069.3622%2054.2552%2069.3622ZM26.1986%2024.9472V68.4081C27.1726%2068.408%2028.1328%2068.2265%2029.1068%2068.2059C33.1953%2068.1198%2036.9129%2068.347%2040.8265%2069.6776C41.7311%2069.9852%2042.6337%2070.2978%2043.5492%2070.5712C43.5492%2070.2524%2043.5492%2070.0595%2043.5492%2069.8671C43.5491%2066.4754%2043.5281%2063.0835%2043.5658%2059.6923C43.6004%2056.5762%2044.978%2053.1745%2046.8607%2050.6893C47.681%2049.6066%2048.5637%2048.6225%2049.6693%2047.8388C50.3616%2047.348%2051.0334%2046.8597%2051.8031%2046.495C53.1145%2045.8736%2054.3323%2045.4158%2055.7376%2045.0731C57.0717%2044.7479%2058.2439%2044.4825%2059.6361%2044.6229C59.8015%2044.6396%2060.0647%2044.9848%2060.0599%2045.1737C60.0373%2046.0307%2059.9906%2046.8955%2059.8431%2047.7382C59.1797%2051.5279%2056.929%2055.3513%2053.8861%2057.7001C52.858%2058.4936%2051.6633%2058.9731%2050.4779%2059.5077C49.6796%2059.8677%2046.7176%2060.2213%2046.723%2061.2255C46.736%2063.6632%2046.7291%2066.1011%2046.7318%2068.5389C46.7319%2068.6663%2046.7605%2068.7938%2046.7826%2068.9735C49.106%2066.9459%2051.2337%2064.8799%2053.7757%2063.1317C55.3358%2062.0589%2056.8511%2061.1257%2058.5638%2060.3055C60.1716%2059.5356%2061.7663%2058.7317%2063.4095%2058.0448C66.0165%2056.955%2068.7942%2056.2957%2071.5453%2055.6972C72.3804%2055.5155%2073.2266%2055.368%2074.0755%2055.2714C75.0492%2055.1606%2076.0307%2055.0843%2077.0101%2055.0604C78.4267%2055.0259%2079.8455%2055.0247%2081.2621%2055.0595C83.378%2055.1113%2085.4497%2055.2173%2087.5433%2055.5194C87.1392%2053.5032%2087.3785%2051.4086%2086.8324%2049.4218C86.449%2048.0267%2086.1791%2046.6089%2085.7357%2045.2245C85.1359%2043.3519%2084.2964%2041.7211%2083.4124%2039.9725C82.6786%2038.5208%2081.6833%2037.2438%2080.7044%2035.9628C80.0389%2035.0918%2079.2497%2034.3146%2078.4632%2033.4413C77.3195%2032.325%2076.0504%2031.3683%2074.7552%2030.4296C74.0445%2029.9145%2073.3124%2029.4205%2072.5521%2028.9833C71.652%2028.4658%2070.7127%2028.015%2069.7865%2027.5438C68.4265%2026.852%2066.9442%2026.428%2065.4818%2026.0116C63.8367%2025.5432%2061.8562%2024.9687%2060.1361%2024.9647C48.8236%2024.939%2037.511%2024.9472%2026.1986%2024.9472ZM79.2718%2060.8827C80.2084%2060.8829%2080.9671%2061.6424%2080.9671%2062.579C80.967%2063.5154%2080.2083%2064.2741%2079.2718%2064.2743C78.3352%2064.2743%2077.5757%2063.5155%2077.5755%2062.579C77.5755%2061.6423%2078.3351%2060.8827%2079.2718%2060.8827ZM69.307%2061.0936C70.0095%2061.0936%2070.5794%2061.6636%2070.5794%2062.3661C70.5794%2063.0686%2070.0095%2063.6386%2069.307%2063.6386C68.6045%2063.6384%2068.0355%2063.0686%2068.0355%2062.3661C68.0355%2061.6636%2068.6046%2061.0937%2069.307%2061.0936ZM32.6986%2043.6014C37.0362%2043.7228%2040.5725%2047.4123%2041.5892%2051.4159C41.7637%2052.1032%2041.7969%2052.8323%2041.8402%2053.5458C42.15%2058.672%2024.8958%2043.3836%2032.6986%2043.6014ZM43.681%2028.9628C44.4764%2027.9441%2045.17%2028.1538%2045.8099%2029.0106C50.3991%2035.1571%2049.9514%2042.0039%2045.43%2048.2177C45.1507%2048.601%2044.2945%2048.5841%2044.0111%2048.2313C39.3117%2042.3799%2038.9656%2035.0033%2043.681%2028.9628ZM58.6673%2029.2587C60.0854%2028.4453%2064.4016%2030.135%2066.183%2030.9364C71.9786%2033.5437%2077.8232%2037.6085%2080.3734%2043.6854C80.6692%2044.3901%2081.1847%2045.0658%2081.0902%2045.9423C80.9302%2047.4238%2078.5368%2048.4396%2077.6312%2047.0204C72.806%2038.9395%2071.4255%2036.5582%2063.2621%2034.0585C62.2382%2033.7449%2054.2182%2031.1043%2058.6673%2029.2587Z%22%20fill%3D%22white%22/%3E%0A%3C/svg%3E%0A" style="height:22px;width:auto;" alt="DigiFarm"/>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.06em;">Field Boundary Detection · Central Europe</div>
+        <span class="badge badge-green"><span class="badge-dot"></span>Model Active</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Layer Toggle Row</div>
+        <div style="display:flex;flex-direction:column;gap:4px;margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:4px;background:rgba(0,148,99,0.07);">
+            <div style="width:26px;height:16px;border-radius:3px;background:linear-gradient(135deg,#2d4a2e,#4a7c59);flex-shrink:0;"></div>
+            <span style="font-size:13px;flex:1;">Satellite Imagery</span>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:2px 5px;">S</span>
+            <div class="toggle-demo on"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:4px;">
+            <div style="width:26px;height:16px;border-radius:3px;background:rgba(0,148,99,0.2);border:1.5px solid #009463;flex-shrink:0;"></div>
+            <span style="font-size:13px;flex:1;color:var(--muted);">Field Boundaries</span>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:2px 5px;">B</span>
+            <div class="toggle-demo"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Confidence Meter</div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+              <span style="color:var(--muted);">Boundary Accuracy</span>
+              <span style="color:#009463;font-family:var(--mono);">94.2%</span>
+            </div>
+            <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.07);">
+              <div style="height:100%;width:94.2%;border-radius:3px;background:#009463;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+              <span style="color:var(--muted);">Crop Classification</span>
+              <span style="color:#EA891D;font-family:var(--mono);">81.7%</span>
+            </div>
+            <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.07);">
+              <div style="height:100%;width:81.7%;border-radius:3px;background:linear-gradient(90deg,#7a3a00,#EA891D);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSS VARIABLES -->
+  <section id="variables">
+    <div class="section-label">Patterns</div>
+    <h2>CSS Variables</h2>
+    <p class="section-desc">Copy this block into every demo. All components reference these variables — never hardcode values.</p>
+    <hr/>
+
+    <div class="code-block">
+<span class="c">/* DigiFarm Design System — v1.0 */</span>
+<span class="c">/* Copy into every demo :root block */</span>
+
+<span class="k">:root</span> {
+  <span class="c">/* Backgrounds */</span>
+  <span class="k">--bg</span>:          <span class="v">#0E1621</span>;  <span class="c">/* main background */</span>
+  <span class="k">--bg2</span>:         <span class="v">#17212B</span>;  <span class="c">/* panels, cards, sidebar */</span>
+  <span class="k">--bg3</span>:         <span class="v">#1D2B39</span>;  <span class="c">/* elevated, hover rows */</span>
+  <span class="k">--border</span>:      <span class="v">rgba(255,255,255,0.06)</span>;  <span class="c">/* default border */</span>
+
+  <span class="c">/* Brand */</span>
+  <span class="k">--green</span>:       <span class="v">#009463</span>;  <span class="c">/* primary action */</span>
+  <span class="k">--purple</span>:      <span class="v">#9C7FEF</span>;  <span class="c">/* secondary accent */</span>
+
+  <span class="c">/* Text */</span>
+  <span class="k">--white</span>:       <span class="v">#FFFFFF</span>;  <span class="c">/* primary text */</span>
+  <span class="k">--muted</span>:       <span class="v">#8697A8</span>;  <span class="c">/* secondary text */</span>
+
+  <span class="c">/* Semantic */</span>
+  <span class="k">--success</span>:     <span class="v">#009463</span>;
+  <span class="k">--warning</span>:     <span class="v">#EA891D</span>;
+  <span class="k">--error</span>:       <span class="v">#F84A4A</span>;
+  <span class="k">--info</span>:        <span class="v">#4DB5FA</span>;
+
+  <span class="c">/* Shape */</span>
+  <span class="k">--radius</span>:      <span class="v">4px</span>;      <span class="c">/* universal border radius */</span>
+
+  <span class="c">/* Typography */</span>
+  <span class="k">--font</span>:        <span class="v">'Inter', sans-serif</span>;
+  <span class="k">--mono</span>:        <span class="v">'IBM Plex Mono', monospace</span>;
+  <span class="k">--text-base</span>:   <span class="v">14px</span>;
+  <span class="k">--text-sm</span>:     <span class="v">13px</span>;
+  <span class="k">--text-xs</span>:     <span class="v">12px</span>;
+  <span class="k">--mono-size</span>:   <span class="v">12px</span>;     <span class="c">/* captions, hints */</span>
+  <span class="k">--h1</span>:          <span class="v">20px</span>;     <span class="c">/* max headline size */</span>
+
+  <span class="c">/* Map overlay blur */</span>
+  <span class="k">--panel-bg</span>:    <span class="v">rgba(23,33,43,0.88)</span>;
+  <span class="k">--panel-blur</span>:  <span class="v">blur(16px)</span>;
+}
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-label">Google Fonts Import</div>
+      <div class="code-block" style="margin-top:8px;background:transparent;border:none;padding:0;">
+<span class="k">&lt;link</span> <span class="v">href</span>=<span class="s">"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"</span> <span class="v">rel</span>=<span class="s">"stylesheet"</span><span class="k">/&gt;</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('nav a');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
